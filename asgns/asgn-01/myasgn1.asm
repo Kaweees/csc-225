@@ -65,7 +65,7 @@ CLEARMASK: .word 0xFF7F	# replace HHHH with hexadecimal VALUE you selected.
 #	0x85CA (ADD/AND/OR/NOT/XOR) SETMASK  =  ????
 
  .eqv SETOP OR	# replace OPERATION with one of (ADD/AND/OR/NOT/XOR).
-SETMASK:	.word 0xFFEF	# replace HHHH with hexadecimal VALUE you selected.
+SETMASK:	.word 0x0020	# replace HHHH with hexadecimal VALUE you selected.
 
 # Determine both the operation (ADD/AND/OR/NOT/XOR) and the value needed to 
 #   test bit if bit 6 of an unknown test value is set.
@@ -73,4 +73,4 @@ SETMASK:	.word 0xFFEF	# replace HHHH with hexadecimal VALUE you selected.
 #
 #	testval (ADD/AND/OR/NOT/XOR) TESTMASK =  ????
  .eqv TESTOP AND  # replace OPERATION with one of (ADD/AND/OR/NOT/XOR).
-TESTMASK: .word 0x0020	# replace HHHH with hexadecimal VALUE you selected.
+TESTMASK: .word 0x0040	# replace HHHH with hexadecimal VALUE you selected.
