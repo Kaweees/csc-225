@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int countBits(int num);
@@ -22,20 +23,21 @@ int main(void) {
 }
 
 int countBits(int num) {
-  int i = 0;
   int count = 0;
-  while (pow(2, i) < num) {
+  int i = 0;
+  int absNum = abs(num);
+
+  while (pow(2, i) < absNum) {
     i++;
   }
-  while (num > 0) {
-    printf("%d\n", num);
+  while (absNum > 0) {
+    printf("%d\n", absNum);
     printf("%f\n", pow(2, i));
-    if (pow(2, i) <= num) {
+    if (pow(2, i) <= absNum) {
       printf("i: %d\n", i);
-      num -= pow(2, i);
+      absNum -= pow(2, i);
       count++;
     }
     i--;
   }
-  return count;
 }
