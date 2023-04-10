@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define INT_SIZE sizeof(int) * 8
+
 int countBits(int num);
 
 /* This is a comment */
@@ -24,20 +26,10 @@ int main(void) {
 
 int countBits(int num) {
   int count = 0;
-  int i = 0;
-  int absNum = abs(num);
-
-  while (pow(2, i) < absNum) {
-    i++;
+  while (num != 0) { 
+    printf("%d %d\n", num, count);
+    count += num & 1;
+    num >>=  1;
   }
-  while (absNum > 0) {
-    printf("%d\n", absNum);
-    printf("%f\n", pow(2, i));
-    if (pow(2, i) <= absNum) {
-      printf("i: %d\n", i);
-      absNum -= pow(2, i);
-      count++;
-    }
-    i--;
-  }
+  return count;
 }
