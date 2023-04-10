@@ -1,9 +1,5 @@
-#include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-
-#define INT_SIZE sizeof(int) * 8
 
 int countBits(int num);
 
@@ -26,10 +22,10 @@ int main(void) {
 
 int countBits(int num) {
   int count = 0;
-  while (num != 0) { 
-    printf("%d %d\n", num, count);
-    count += num & 1;
-    num >>=  1;
+  unsigned int cast = (unsigned int)num; /*cast to unsigned int*/
+  while (cast != 0) {
+    count += cast & 1; /**add lsb to counter*/
+    cast >>= 1;        /** right-shift by one position to discard lsb*/
   }
   return count;
 }
