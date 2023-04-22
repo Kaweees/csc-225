@@ -1,10 +1,12 @@
 	.global main # main is a label that other programs and files can see.
 	
 	.data # this part (section) of the program is data
+new_line: .string "\n"
+msg_welcome: .string "Welcome to the CountOnes program." # Copy strings for input / output into memory
 msg_enter: .string "\nPlease enter a number: "
-msg_result: .string "\nThe number of bits set is: "
+msg_result: .string "The number of bits set is: "
 msg_continue: .string "\nContinue (y/n)?: "
-msg_exit: .string "Exiting\n"
+msg_exit: .string "\nExiting"
 	
 	.text # this part (section) of the program is code
 main: # Make a label to say where our program should start from
@@ -16,6 +18,11 @@ main: # Make a label to say where our program should start from
 	ecall # system calls
 	
 prompt_loop:
+	# Print extra line
+	la a0, new_line
+	li a7, 4 # prints greeting to console
+	ecall # system calls
+
 	# Prompt for input
 	la a0, msg_enter
 	li a7, 4
@@ -45,11 +52,12 @@ count_loop:
 	j count_loop
 	
 result:
-	# Print result
+	# Print msg_result
 	la a0, msg_result
 	li a7, 4
 	ecall
-	mv a0, t1
+	
+  mv a0, t1 # print the number of bits set
 	li a7, 1
 	ecall
 	
@@ -65,6 +73,7 @@ result:
 	# Check if prompt is 'n'
 	li t5, 'n' # load ASCII code of 'n'
 	bne t4, t5, prompt_loop # if t4 != t5, then jump to prompt_loop
+
 	
 exit:
 	# Print exit message
