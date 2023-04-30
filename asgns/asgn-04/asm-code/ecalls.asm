@@ -1,4 +1,4 @@
-	.globl printint, printstring, printchar, readint, readchar, exit0 # declare global symbols
+	.globl printint, printstring, printchar, readint, readchar, readstring, exit0 # declare global symbols
 	.text # start of the code section
 	
 	# Subroutine to print a given integer
@@ -38,6 +38,16 @@ readint:
 readchar:
 	li a7, 12 # syscall code for reading a character
 	ecall # execute the syscall
+	ret # return to caller
+	# end subroutine
+	
+	# Subroutine to read a string
+# Outputs: a0 - the string that was read
+readstring:
+	li a7, 8 # syscall code for reading a character
+	ecall # execute the syscall
+	ret # return to caller
+	# end subroutine
 	
 	# Subroutine to exit the program
 exit0:

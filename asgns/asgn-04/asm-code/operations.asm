@@ -1,5 +1,5 @@
 	.global addnums, subnums, multnums, divnums, andnums, ornums, xornums, lshiftnums, rshiftnums
-	.text
+	.text # start of the code section
 	
 	# Subroutine to add two integers
 # Inputs: a0, a1 - the integers to add
