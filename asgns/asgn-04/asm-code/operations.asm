@@ -53,7 +53,7 @@ xornums:
 	# Subroutine to left shift a number a given amount of times
 # Inputs: a0 - the number to shift, a1 - the amount of times to shift
 lshiftnums:
-	slli a0, a0, a1
+	sll a0, a0, a1
 	ret # return to caller
 	# end subroutine
 	
