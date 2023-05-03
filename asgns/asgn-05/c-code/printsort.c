@@ -11,7 +11,7 @@ int main(void) {
   while (1) {
     printf("Enter word: ");
     readstring(word);
-    if (word[0] == '\n') {
+    if (getStringLen(word) == 0) {
       break;
     }
     printf("Original word: %s\n", word);
@@ -20,7 +20,7 @@ int main(void) {
     printf("\n");
   }
 
-  printf("Exiting");
+  printf("\nExiting\n");
   return 0;
 }
 
