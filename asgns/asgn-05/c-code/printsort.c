@@ -2,68 +2,64 @@
 
 #define MAX_WORD_SIZE 20
 
-
-
-int countBits(int num);
-char *getWord(char *word);
-void printsort(char word[]);
+void readstring(char str[]);
+void printsort(char word[], int word_size);
+int getStringLen(char word[]);
 
 int main(void) {
   char word[MAX_WORD_SIZE];
-
   while (1) {
     printf("Enter word: ");
-    getWord(word);
-
-    if (&word == '\n') {
+    readstring(word);
+    if (word[0] == '\n') {
       break;
     }
-    printsort(word);
+    printf("Original word: %s\n", word);
+    printf("Alphabetized word ");
+    printsort(word, getStringLen(word));
+    printf("\n");
   }
 
   printf("Exiting");
   return 0;
 }
-// for (int i = 0; i < word.length; i++) {
-    //   for (int j = i + 1; j < word.length; j++) {
-    //     if (word[i] > word[j]) {
-    //       char temp = word[i];
-    //       word[i] = word[j];
-    //       word[j] = temp;
-    //     }
-    //   }
-    //   printf("%c", word[i]);
-    // }
-    // printf("\n");
-char *getWord(char *word) {
-  printf("Enter word: ");
+
+void readstring(char str[]) {
+  int ch;
   int i = 0;
-  char ch = getchar();
-  while (ch != '\n' && ch != ' ') {
-    word[i] = ch;
-    ch = getchar();
-    i++;
+  while ((ch = getchar()) != '\n') {
+    str[i++] = (char)ch;
   }
-  while (ch != '\n') {
-    ch = getchar();
-    word += ch;
-  }
-  word[i] = '\0';
-  return word;
+  str[i] = '\0';
 }
 
-void printsort(char word[]) {
-  printf("Original word: %s\n", word);
-  printf("Alphabetized word: ");
-  for (int i = 0; i < word.length; i++) {
-    for (int j = i + 1; j < word.length; j++) {
-      if (word[i] > word[j]) {
-        char temp = word[i];
-        word[i] = word[j];
-        word[j] = temp;
+void printsort(char word[], int word_size) {
+  int i, j, k, smallCount;
+  int smallest = 9999;
+  int minCeiling = -1;
+
+  for (i = 0; i < word_size; i++) {
+    smallest = 9999;
+    smallCount = 0;
+    for (j = 0; j < word_size; j++) {
+      if (minCeiling < word[j] && word[j] < smallest) {
+        smallest = word[j];
+        smallCount = 1;
+      } else if (smallest == word[j]) {
+        smallCount++;
       }
     }
-    printf("%c", word[i]);
+    for (k = 0; k < smallCount; k++) {
+      printf("%c", smallest);
+    }
+    minCeiling = smallest;
   }
-  printf("\n");
+}
+
+int getStringLen(char word[]) {
+  int i = 0;
+  while (word[i] != '\0') {
+    i++;
+  }
+  return i;
 }
