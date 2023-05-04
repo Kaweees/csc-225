@@ -15,7 +15,7 @@ int main(void) {
       break;
     }
     printf("Original word: %s\n", word);
-    printf("Alphabetized word ");
+    printf("Alphabetized word: ");
     printsort(word, getStringLen(word));
     printf("\n");
   }

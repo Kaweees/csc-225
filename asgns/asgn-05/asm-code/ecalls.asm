@@ -42,10 +42,19 @@ readchar:
 	# end subroutine
 	
 	# Subroutine to read a string
-# Outputs: a0 - the string that was read
+# Inputs: a0 - the address of the string to read into
 readstring:
-	li a7, 8 # syscall code for reading a character
-	ecall # execute the syscall
+  li t0, 0 # i = 0
+	mv t1, a0 # save the address of the string
+  li t2, 10 # t2 = "\n"
+loop:
+	jal readint
+	beq a0, t2, endloop # If char = "\n", exit loop
+	addi, t0, t0, 1 # i + = 1
+	sw a0, 0(t1) # store character in string
+	j loop
+endloop:
+	sw x0, 0(t1)
 	ret # return to caller
 	# end subroutine
 	
