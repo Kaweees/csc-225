@@ -1,4 +1,4 @@
-	.globl printint, printstring, printchar, readint, readchar, readstring, exit0 # declare global symbols
+	.globl printint, printstring, printchar, readint, readchar, clearString, readstring, exit0 # declare global symbols
 	.text # start of the code section
 	
 	# Subroutine to print a given integer
@@ -40,22 +40,39 @@ readchar:
 	ecall # execute the syscall
 	ret # return to caller
 	# end subroutine
-	
+
+
+	# Subroutine to clear a string
+# Inputs: a0 - the address of the string to read into, a1 - the address subroutine was called from, a2 - the length of the string
+clearString:
+	mv t0, a0 # t0 = a0
+	mv t1, a2 # incremented address size
+	mv t2, a2 # len
+	li t3, 0 # i = 0
+while:
+	addi t1, t1, 1
+	addi, t3, t3, 1
+	beq t2, t3, end_while # if string[i] == 0, goto end_while
+	sb x0, 0(t0) # store character in string
+	j while # goto while
+end_while:
+	jr a1 # return to address called from + 4
+	# end subroutine
+
 	# Subroutine to read a string
-# Inputs: a0 - the address of the string to read into
+# Inputs: a0 - the address of the string to read into, a1 - the address subroutine was called from 
 readstring:
-  li t0, 0 # i = 0
-	mv t1, a0 # save the address of the string
-  li t2, 10 # t2 = "\n"
+	mv t0, a0 # save the address of the string
+	li t1, 10 # t2 = "\n"
 loop:
-	jal readint
-	beq a0, t2, endloop # If char = "\n", exit loop
-	addi, t0, t0, 1 # i + = 1
-	sw a0, 0(t1) # store character in string
-	j loop
+	jal readchar
+	beq a0, t1, endloop # If char = "\n", exit loop
+	sb a0, 0(t0) # store character in string
+	addi, t0, t0, 1 # increment address by 1
+	b loop
 endloop:
-	sw x0, 0(t1)
-	ret # return to caller
+	sb x0, 0(t0)
+	jr a1 # return to address called from + 4
 	# end subroutine
 	
 	# Subroutine to exit the program
