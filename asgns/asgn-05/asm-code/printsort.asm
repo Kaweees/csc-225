@@ -45,7 +45,6 @@ main: # entry point for the program
 endprintsort:
 	la a0, new_line # load address of new_line into a0
 	jal printstring # print my_string
-	
 	j main
 	
 printsort:
