@@ -34,7 +34,7 @@ void readstring(char str[]) {
 }
 
 void printsort(char word[], int word_size) {
-  int i, j, k, smallCount;
+  int i, j, smallCount;
   int smallest = 9999;
   int minCeiling = -1;
 
@@ -49,7 +49,7 @@ void printsort(char word[], int word_size) {
         smallCount++;
       }
     }
-    for (k = 0; k < smallCount; k++) {
+    for (j = 0; j < smallCount; j++) {
       printf("%c", smallest);
     }
     minCeiling = smallest;
