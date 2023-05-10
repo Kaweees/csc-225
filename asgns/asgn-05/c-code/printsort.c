@@ -36,7 +36,8 @@ void readstring(char str[]) {
 void printsort(char word[], int word_size) {
   int i, j, smallCount;
   int smallest = 9999; /* smallest num in array */
-  int minCeiling = -1; /* smallest num in array that is greater than minCeiling */
+  int minCeiling =
+      -1; /* smallest num in array that is greater than minCeiling */
 
   for (i = 0; i < word_size; i++) {
     smallest = 9999;
