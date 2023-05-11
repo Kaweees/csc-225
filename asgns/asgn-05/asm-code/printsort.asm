@@ -2,6 +2,7 @@
 	
 	.data # start of the data section
 return_address: .word -1 # return address for when subroutines are called
+return_len : .word -1 # return value for when subroutines are called
 my_string: .space 20 # allocate space for 19 characters and a null terminator
 new_line: .string "\n"
 msg_menu: .string "Enter word: "
@@ -25,7 +26,7 @@ main: # entry point for the program
 	jal ra, readstring # store user input into my_string
 	
 	mv a0, s0 # load address of my_string into a0
-	jal a1, getStringLen
+	jal ra, getStringLen
 	mv s1, a0 # length = a0
 	beqz s1, exit # if length == 0, goto exit
 	
@@ -102,8 +103,11 @@ exit:
 	jal exit0
 	
 	# Subroutine to get the length of a given string
-# Inputs: a0 - the address of the string, a1 - the address subroutine was called from 
+# Inputs: a0 - the address of the string
 getStringLen:
+  la t0, return_len
+  sw ra, 0(t0) # save the return address
+
 	mv t0, a0 # t0 = a0
 	li t1, 0 # length = 0
 while:
@@ -114,5 +118,7 @@ while:
 	j while # goto while
 end_while:
 	mv a0, t1 # a0 = length
-	jr a1 # return to address called from + 4
+	la t0, return_len
+  lw ra, 0(t0) # restore the return address
+	jr ra # return to address called from + 4
 	# end subroutine

@@ -1,4 +1,4 @@
-	.globl printint, printstring, printchar, readint, readchar, clearString, readstring, exit0 # declare global symbols
+	.globl printint, printstring, printchar, readint, readchar, clearstring, readstring, exit0 # declare global symbols
 	.text # start of the code section
 	
 	# Subroutine to print a given integer
