@@ -41,13 +41,15 @@ readchar:
 	ret # return to caller
 	# end subroutine
 
-
 	# Subroutine to clear a string
-# Inputs: a0 - the address of the string to read into, a1 - the address subroutine was called from, a2 - the length of the string
-clearString:
+# Inputs: a0 - the address of the string to read into, a1 - the length of the string
+clearstring:
+  la t0, return_address
+  sw ra, 0(t0) # save the return address
+  
 	mv t0, a0 # t0 = a0
-	mv t1, a2 # incremented address size
-	mv t2, a2 # len
+	mv t1, a1 # incremented address size
+	mv t2, a1 # len
 	li t3, 0 # i = 0
 while:
 	addi t1, t1, 1
@@ -56,12 +58,17 @@ while:
 	sb x0, 0(t0) # store character in string
 	j while # goto while
 end_while:
-	jr a1 # return to address called from + 4
+  la t0, return_address
+  lw ra, 0(t0) # restore the return address
+	jr ra # return to address called from + 4
 	# end subroutine
 
 	# Subroutine to read a string
 # Inputs: a0 - the address of the string to read into, a1 - the address subroutine was called from 
 readstring:
+  la t0, return_address
+  sw ra, 0(t0) # save the return address
+
 	mv t0, a0 # save the address of the string
 	li t1, 10 # t2 = "\n"
 loop:
@@ -72,9 +79,11 @@ loop:
 	b loop
 endloop:
 	sb x0, 0(t0)
-	jr a1 # return to address called from + 4
+  la t0, return_address
+  lw ra, 0(t0) # restore the return address
+	jr ra # return to address called from + 4
 	# end subroutine
-	
+
 	# Subroutine to exit the program
 exit0:
 	li a7, 10 # syscall code for exiting the program

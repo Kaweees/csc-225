@@ -19,10 +19,10 @@ main: # entry point for the program
 	jal printstring # print msg_menu
 	
 	mv a0, s0 # load address of my_string into a0
-	li a2, 20
-	jal a1, clearString
+	li a1, 20 # max length of string
+	jal ra, clearstring
 	mv a0, s0 # load address of my_string into a0
-	jal a1, readstring # store user input into my_string
+	jal ra, readstring # store user input into my_string
 	
 	mv a0, s0 # load address of my_string into a0
 	jal a1, getStringLen
