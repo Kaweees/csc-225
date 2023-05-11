@@ -56,10 +56,11 @@ printsort:
 	li t5, -1 # minCeiling = -1
 	
 outer_loop:
-	bge t1, s1, end_outer_loop # while i < length
+	bgt t1, s1, end_outer_loop # while i < length
 	li t3, 0 # smallCount = 0
 	li t4, 0 # smallest = 0
 	li t4, 999 # smallest = 999
+  li t2, 0 # j = 0
 inner_loop:
 	bge t2, s1, print_nums # while j < length
 	add t0, s0, t2 # incremented address (j)
