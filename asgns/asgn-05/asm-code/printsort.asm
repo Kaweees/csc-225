@@ -50,47 +50,46 @@ endprintsort:
 	j main
 	
 printsort:
-	li t0, 0 # i = 0
-	li t1, 0 # j = 0
-  li t2, 0 # smallCount = 0
-  li t3, 999 # smallest = 999
-  li t4, -1 # minCeiling = -1
+	li t1, 0 # i = 0
+	li t2, 0 # j = 0
+	li t5, 0 # minCeiling = 0
+	li t5, -1 # minCeiling = -1
 	
 outer_loop:
-	bge t0, s1, end_outer_loop # while i < length
-  li t3, 999 # smallest = 999
-  li t2, 0 # smallCount = 0
+	bge t1, s1, end_outer_loop # while i < length
+	li t3, 0 # smallCount = 0
+	li t4, 0 # smallest = 0
+	li t4, 999 # smallest = 999
 inner_loop:
-	bge t1, s1, print_nums # while j < length
-	add t5, s0, t2 # t5 = &string[j]
-  lb t5, 0(t5) # t5 = string[j]
-	blt t5, t3, if # if string[j] < smallest, goto if
-	beq t5, t3, elif # if string[j] == smallest, goto elif
-	j end_if # goto end_if
+	bge t2, s1, print_nums # while j < length
+	add t0, s0, t2 # incremented address (j)
+	lb t0, 0(t0) # load byte at address t0 (string[j])
 if:
-	bge t5, t4 end_if # if string[j] >= minCeiling, goto end_if
-	mv t3, t5 # smallest = string[j]
-  li, t2, 1 # smallCount = 1
-	j end_if # goto end_if
+  # works if (minCeiling < word[j] && word[j] < smallest)
+  bge t5, t0, elif # if minCeiling >= word[j]
+  bge t0, t4, elif # if word[j] >= smallest
+  mv t4, t0 # smallest = word[j]
+  j end_if # goto end_if
 elif:
-	addi t2, t2, 1 # smallCount++
-	j end_if # goto end_if
+  # works if (smallest == word[j])
+  bne t4, t0, end_if # if smallest != word[j], goto end_if
+  addi t3, t3, 1 # smallcount++
+  j end_if # goto end_if
 end_if:
-	addi t1, t1, 1 # j++
-	j inner_loop # goto inner_loop
+  addi t2, t2, 1 # j++
+  j inner_loop # goto inner_loop
 print_nums:
-	li t1, 0 # j = 0
-	
+	li t2, 0 # j = 0
+	mv t5, t4 # minCeiling = smallest
 print_loop:
-	bge t1, t2, end_inner_loop # while j < smallCount
-	mv a0, t3 # a0 = smallest
+	bge t2, t3, end_inner_loop # while j < smallCount
+	mv a0, t5 # a0 = smallest
 	jal printchar # print smallest
-	addi t1, t1, 1 # j++
+	addi t2, t2, 1 # j++
 	j print_loop # goto print_loop
 	
 end_inner_loop:
-  mv t4, t3 # minCeiling = smallest
-	addi t0, t0, 1 # i++
+	addi t1, t1, 1 # i++
 	j outer_loop # goto outer_loop
 	
 end_outer_loop:
@@ -118,7 +117,7 @@ while:
 	addi t1, t1, 1 # i + = 1
 	j while # goto while
 end_while:
-  mv a0, t1 # a0 = length
+	mv a0, t1 # a0 = length
 	la t0, return_len
   lw ra, 0(t0) # restore the return address
 	jr ra # return to address called from + 4
