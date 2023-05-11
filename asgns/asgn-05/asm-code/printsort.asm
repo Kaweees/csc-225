@@ -1,8 +1,6 @@
-  .global main, getStringLen, return_address # declare global symbols
+  .global main, getStringLen # declare global symbols
   
   .data # start of the data section
-return_address: .word -1 # return address for when subroutines are called
-return_len : .word -1 # return value for when subroutines are called
 my_string: .space 20 # allocate space for 19 characters and a null terminator
 new_line: .string "\n"
 msg_menu: .string "Enter word: "

@@ -1,4 +1,8 @@
-	.globl printint, printstring, printchar, readint, readchar, clearstring, readstring, exit0 # declare global symbols
+	.globl printint, printstring, printchar, readint, readchar, clearstring, readstring, exit0, return_len, return_address # declare global symbols
+
+  .data # start of the data section
+	return_address: .word -1 # return address for when subroutines are called
+	return_len: .word -1 # return value for when subroutines are called
 	.text # start of the code section
 	
 	# Subroutine to print a given integer
@@ -64,7 +68,7 @@ end_while:
 	# end subroutine
 
 	# Subroutine to read a string
-# Inputs: a0 - the address of the string to read into, a1 - the address subroutine was called from 
+# Inputs: a0 - the address of the string to read into
 readstring:
   la t0, return_address
   sw ra, 0(t0) # save the return address
