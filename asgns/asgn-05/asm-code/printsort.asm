@@ -64,20 +64,21 @@ inner_loop:
 	bge t2, s1, print_nums # while j < length
 	add t0, s0, t2 # incremented address (j)
 	lb t0, 0(t0) # load byte at address t0 (string[j])
+  j if # goto if
 if:
-  # works if (minCeiling < word[j] && word[j] < smallest)
-  bge t5, t0, elif # if minCeiling >= word[j]
-  bge t0, t4, elif # if word[j] >= smallest
-  mv t4, t0 # smallest = word[j]
-  j end_if # goto end_if
+	bge t5, t0, elif # if minCeiling >= string[j], goto elif
+	bge t0, t4,elif # if string[j] >= smallest, goto elif
+	li, t3, 1 # smallCount = 0
+	mv t4, t0 # smallest = string[j]
+	j end_if # goto end_if
 elif:
   # works if (smallest == word[j])
-  bne t4, t0, end_if # if smallest != word[j], goto end_if
-  addi t3, t3, 1 # smallcount++
-  j end_if # goto end_if
+  bne t0, t4, end_if # if smallest != word[j], goto end_if
+	addi t3, t3, 1 # smallCount++
+	j end_if # goto end_if
 end_if:
-  addi t2, t2, 1 # j++
-  j inner_loop # goto inner_loop
+	addi t2, t2, 1 # j++
+	j inner_loop # goto inner_loop
 print_nums:
 	li t2, 0 # j = 0
 	mv t5, t4 # minCeiling = smallest
