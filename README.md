@@ -33,8 +33,8 @@ quit # to exit the server
 ```
 Available commands:
 ```sh
-put file1 file2 (optional) # copy a file from the local machine to the remote machine
-get file1 file2 (optional) # copy a file from the remote machine to the local machine
+put -flags file1 file2 (optional) # copy a file from the local machine to the remote machine
+get -flags file1 file2 (optional) # copy a file from the remote machine to the local machine
 ls # get a directory listing on the remote machine
 cd # change your current working directory on the remote machine
 lls # get a directory listing on the local machine
