@@ -24,7 +24,7 @@ forloop:
 
 if1:
   # works if (arr[j] < arr[min])
-  bge t0, t1, endif1 # if arr[j] >= arr[min], goto endif1
+  bge t2, t3, endif1 # if arr[j] >= arr[min], goto endif1
   mv t1, t0 # min = j
 
 endif1:
@@ -55,6 +55,7 @@ if2:
   jal selectionSort # selectionSort(arr, i + 1, n)
 
 endif2:
+  sw ra, 0(sp) # save ra to stack
   ret # return to caller
 	# end subroutine
 
@@ -70,5 +71,6 @@ swap:
 
   sw t3, 0(t0) # arr[i] = arr[j]
   sw t1, 0(t2) # arr[j] = arr[i]
+  lw ra, 0(sp) # restore ra from stack
   ret # return to caller
 	# end subroutine
