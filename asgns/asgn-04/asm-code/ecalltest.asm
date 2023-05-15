@@ -4,35 +4,35 @@
 	.globl main
 main:
 	#stinkup the caller save registers
-	li a0, - 1
-	li a1, - 1
-	li a2, - 1
-	li a3, - 1
-	li a4, - 1
-	li a5, - 1
-	li a6, - 1
-	li a7, - 1
-	li t0, - 1
-	li t1, - 1
-	li t2, - 1
-	li t3, - 1
-	li t4, - 1
-	li t5, - 1
-	li t6, - 1
+	li a0, -1
+	li a1, -1
+	li a2, -1
+	li a3, -1
+	li a4, -1
+	li a5, -1
+	li a6, -1
+	li a7, -1
+	li t0, -1
+	li t1, -1
+	li t2, -1
+	li t3, -1
+	li t4, -1
+	li t5, -1
+	li t6, -1
 	
 	#preload the callee save registers to check later.
-	li s0, - 1
-	li s1, - 1
-	li s2, - 1
-	li s3, - 1
-	li s4, - 1
-	li s5, - 1
-	li s6, - 1
-	li s7, - 1
-	li s8, - 1
-	li s9, - 1
-	li s10, - 1
-	li s11, - 1
+	li s0, -1
+	li s1, -1
+	li s2, -1
+	li s3, -1
+	li s4, -1
+	li s5, -1
+	li s6, -1
+	li s7, -1
+	li s8, -1
+	li s9, -1
+	li s10, -1
+	li s11, -1
 	
 	la a0, startmsg
 	jal printstring
@@ -51,7 +51,7 @@ done:
 	
 	#should not reach this line
 	li a7, 93
-	li a0, - 1
+	li a0, -1
 	ecall
 	
 	.data
@@ -77,7 +77,7 @@ respstr: .space 20
 	.text
 	
 readstringtest: #8
-	addi sp, sp, - 16
+	addi sp, sp, -16
 	sw ra, 12(sp)
 	la a0, promptstr
 	jal printstring
@@ -93,7 +93,7 @@ readstringtest: #8
 	ret
 	
 printchartest: #11
-	addi sp, sp - 16
+	addi sp, sp -16
 	sw ra, 12(sp)
 	la a0, printcharmsg
 	jal printstring
@@ -104,7 +104,7 @@ printchartest: #11
 	ret
 	
 readchartest: #12
-	addi sp, sp, - 16
+	addi sp, sp, -16
 	sw ra, 12(sp)
 	sw s0, 8(sp)
 	
@@ -128,7 +128,7 @@ endreadchartest:
 	
 	
 printinttest: #11
-	addi sp, sp - 16
+	addi sp, sp -16
 	sw ra, 12(sp)
 	la a0, printintmsg1
 	jal printstring
@@ -141,7 +141,7 @@ printinttest: #11
 	ret
 	
 readinttest: #12
-	addi sp, sp, - 16
+	addi sp, sp, -16
 	sw ra, 12(sp)
 	la a0, readintmsg1
 	jal printstring
@@ -161,9 +161,9 @@ endreadinttest:
 	
 regcheck:
 	#break callee save register usage rules because i'm the boss.
-	addi sp, sp - 16
+	addi sp, sp -16
 	sw ra, 12(sp)
-	li a0, - 1
+	li a0, -1
 	bne s0, a0, regerror
 	bne s1, a0, regerror
 	bne s2, a0, regerror
