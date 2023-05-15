@@ -5,10 +5,10 @@ void swap(studentNode *arr, int i, int j);
 void selectionSort(studentNode *arr, int i, int n);
 void printArray(studentNode *arr, int n);
 
-struct Node { // 32 bytes
-  char name[6]; // 24 bytes
-  int studentid; // 4 bytes
-  int coursenum; // 4 bytes
+struct Node {     // 32 bytes
+  char name[6];   // 24 bytes
+  int studentid;  // 4 bytes
+  int coursenum;  // 4 bytes
 };
 
 studentNode studentlist[SIZE] = {{"Dougy", 13, 2122}, {"Timmy", 15, 2122},
