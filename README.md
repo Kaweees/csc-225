@@ -55,6 +55,12 @@ Once gcc is installed on your machine, you can compile and run C programs via th
 gcc -ansi -Wall -pedantic -Werror -o programname programname.c
 ./programname # to run the program
 ```
+or
+```sh
+gcc -ansi -Wall -pedantic -Werror programname.c
+./a.out # to run the program
+```
+
 The `-ansi` flag specifies that the compiler should implement the ANSI C standard, `-Wall` enables all compiler warnings, `-pedantic` tells the compiler to be adhere strictly to the ANSI C standard, and `-Werror` tells the compiler to treat all warnings as errors.
 
 [contributors-shield]: https://img.shields.io/github/contributors/Kaweees/csc-225.svg?style=for-the-badge
