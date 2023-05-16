@@ -2,7 +2,7 @@
   #int main() {
 main:
   li sp, 0x7ffffe00
-  addi sp, sp, - 48
+  addi sp, sp, -48
   sw ra, 44(sp)
   sw s0, 40(sp)
   
@@ -20,7 +20,7 @@ main:
   sw t0, 16(sp)
   li t0, 9
   sw t0, 20(sp)
-  li t0, - 2
+  li t0, -2
   sw t0, 24(sp)
   li t0, 2
   sw t0, 28(sp)
@@ -30,37 +30,37 @@ main:
   sw t0, 36(sp)
   
   #init saved registers.
-  li s0, - 1
-  li s1, - 1
-  li s2, - 1
-  li s3, - 1
-  li s4, - 1
-  li s5, - 1
-  li s6, - 1
-  li s7, - 1
-  li s8, - 1
-  li s9, - 1
-  li s10, - 1
-  li s11, - 1
+  li s0, -1
+  li s1, -1
+  li s2, -1
+  li s3, -1
+  li s4, -1
+  li s5, -1
+  li s6, -1
+  li s7, -1
+  li s8, -1
+  li s9, -1
+  li s10, -1
+  li s11, -1
   
   #init temp registers.
-  li t0, - 1
-  li t1, - 1
-  li t2, - 1
-  li t3, - 1
-  li t4, - 1
-  li t5, - 1
-  li t6, - 1
+  li t0, -1
+  li t1, -1
+  li t2, -1
+  li t3, -1
+  li t4, -1
+  li t5, -1
+  li t6, -1
   
   #init arg registers.
-  li a0, - 1
-  li a1, - 1
-  li a2, - 1
-  li a3, - 1
-  li a4, - 1
-  li a5, - 1
-  li a6, - 1
-  li a7, - 1
+  li a0, -1
+  li a1, -1
+  li a2, -1
+  li a3, -1
+  li a4, -1
+  li a5, -1
+  li a6, -1
+  li a7, -1
   
   # printArray(arr, n)         ;
   mv a0, sp
@@ -93,7 +93,7 @@ main:
   ######################################################################v
   #void printArray(int arr[], int n) {
 printArray:
-  addi sp, sp, - 16
+  addi sp, sp, -16
   sw ra, 12(sp)
   sw s0, 8(sp)
   sw s1, 4(sp)
@@ -124,7 +124,7 @@ forloop:
   li a7, 11
   ecall # print a space
   
-  #i + + 
+  #i++
   addi s2, s2, 1 # increment i
   b forloop
   # }
@@ -154,7 +154,7 @@ checkregisters:
   ecall
   li t1, 0
 SPOK:
-  li t0, - 1
+  li t0, -1
   beq t0, s0, S0OK
   #s0 corrupted
   la a0, s0msg

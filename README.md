@@ -11,7 +11,7 @@
 All of my course files (labs and projects) for CSC 225 (Introduction to Computer Organization) taken through Cal Poly, with Professor John Planck.
 
 ## User Guide
-
+> Note: To connect to the Cal Poly servers, you must be connected to the Cal Poly network (either on campus or via the [Cal Poly VPN](https://calpoly.atlassian.net/wiki/spaces/CPKB/pages/2425047/Set+up+VPN)).
 Available Cal Poly Unix Machines:
 - username@unix1.csc.calpoly.edu
 - username@unix2.csc.calpoly.edu
