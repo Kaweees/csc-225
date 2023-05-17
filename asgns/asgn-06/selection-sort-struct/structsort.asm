@@ -140,10 +140,11 @@ loopcond1:
 loopcond2:
   bge t3, a2, endloopcond # if (k >= j) goto endloopcond
   addi t1, t1, 32 # t1 = &arr[j] (32 bytes offset)
-  addi t2, t2, 1 # t2++
+  addi t2, t2, -1 # t2--
 
 endloopcond:
   beq t2, x0, for4 # if (t2 == 0) goto for4
+  li t2, 2 # t2 = conditional
   j forloop3
 
 for4:
