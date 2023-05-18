@@ -11,8 +11,7 @@ selectionSort:
 
   li t0, 0 # int j
   mv t1, a1 # min = i
-  li t2, 4 # offset = 4
-
+  li t2, 4 # size of element in array
 
 for1: # for1 (j = i + 1; j < n; j++)
   addi t0, a1, 1 # j = i + 1
