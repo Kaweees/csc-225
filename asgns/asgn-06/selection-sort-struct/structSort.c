@@ -5,10 +5,13 @@ void swap(studentNode *arr, int i, int j);
 void selectionSort(studentNode *arr, int i, int n);
 void printArray(studentNode *arr, int n);
 
-struct Node {     // 32 bytes
-  char name[6];   // 24 bytes
-  int studentid;  // 4 bytes
-  int coursenum;  // 4 bytes
+/* A character is one byte, an integer is 4 bytes, and a pointer is 8 bytes.
+ * Therefore, the size of a node is 18 bytes. */
+struct Node { /* 14 bytes */
+  /* Padding */
+  char name[6];  /* 5 bytes for 5 characters, 1 byte for null character */
+  int studentid; /* 4 bytes */
+  int coursenum; /* 4 bytes */
 };
 
 studentNode studentlist[SIZE] = {{"Dougy", 13, 2122}, {"Timmy", 15, 2122},
