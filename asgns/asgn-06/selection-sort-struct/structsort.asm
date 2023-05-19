@@ -80,41 +80,38 @@ for2:
 
 forloop2:
   bge t0, a1, endfor2 # if (i >= n) goto endfor2
-  addi sp, sp, -32 # allocate space on the stack
-  sw a0, 0(sp) # save arr[] to stack
-  sw a1, 4(sp) # save n to stack
-  sw t0, 8(sp) # save i to stack
-  sw t1, 12(sp) # save size to stack
-  sw t2, 16(sp) # save arr[i]
 
-  lw a0, 0(sp) # a0 = arr[i].studentid
-  jal printstring # printstring(arr[i].studentid)
+  # print arr[i].studentid
 
+  # printchar(' ')
   li a0, 32 # a0 = ' '
-  jal printchar # printchar(' ')
-  
-  lw a0, 16(sp) # restore arr[i] from stack
+  li a7, 11 # syscall code for printing a character
+	ecall # execute the syscall
+
+  # printint(arr[i].studentid)
+  mv a0, t2 # a0 = arr[i]
   addi a0, a0, 24 # a0 = arr[i].studentid
-  jal printint # printstring(arr[i].studentid)
+  li a7, 1 # syscall code for printing an integer
+	ecall # execute the syscall
 
+  # printchar(' ')
   li a0, 32 # a0 = ' '
-  jal printchar # printchar(' ')
+  li a7, 11 # syscall code for printing a character
+	ecall # execute the syscall
 
-  lw a0, 16(sp) # restore arr[i] from stack
+  # printint(arr[i].studencoursenumtid)
+  mv a0, t2 # a0 = arr[i]
   addi a0, a0, 28 # a0 = arr[i].coursenum
-  jal printint # printstring(arr[i].studencoursenumtid)
+  li a7, 1 # syscall code for printing an integer
+	ecall # execute the syscall
 
+  # printchar('\n')
   li a0, 10 # a0 = '\n'
-  jal printchar # printchar('\n')
+  li a7, 11 # syscall code for printing a character
+	ecall # execute the syscall
 
-  lw a0, 0(sp) # restore arr[] from stack
-  lw a1, 4(sp) # restore n from stack
-  lw t0, 8(sp) # restore i from stack
-  lw t1, 12(sp) # restore size from stack
-  lw t2, 16(sp) # restore arr[i] from stack
   addi t2, t2, 32 # arr[i + 32]
   addi t0, t0, 1 # i++
-  addi sp, sp, 32 # deallocate space on the stack
   j forloop2
 
 endfor2:
