@@ -9,7 +9,6 @@ selectionSort:
   addi sp, sp, -16 # allocate space on the stack
   sw ra, 0(sp) # save ra to stack
 
-  li t0, 0 # int j
   mv t1, a1 # min = i
   li t2, 16 # size of element in array
 
@@ -25,7 +24,7 @@ forloop1:
   
   mul t5, t1, t2 # minOffset = min * size
   add t5, a0, t5 # &arr[min]
-  addi t6, t5, 284 # t6 = &arr[min].studentid (8 byte offset)
+  addi t6, t5, 8 # t6 = &arr[min].studentid (8 byte offset)
   lw t6, 0(t6) # t6 = *(&arr[min].studentid)
 
 if1:
@@ -126,45 +125,26 @@ endfor2:
 # outputs: None
 swap:
   li t0, 16 # nodeSize (in bytes) = 16
-  # addi a1, a1, 1 # i++
-
   mul t1, a1, t0
   add t1, a0, t1 # t1 = &arr[i]
   mul t2, a2, t0
   add t2, a0, t2 # t3 = &arr[j]
 
 for3:
-  li t0, 6 # length of node.name
-  li t3, 0 # k = 0
-
-forloop3:
-  bge t3, t0, for4 # if (k >= length of node.name), goto for4 
-  lw t4, 0(t1) # t4 = *(&arr[i] + k)
-  lw t5, 0(t2) # t5 = *(&arr[j] + k)
-  sw t4, 0(t1) # arr[i] = arr[j]
-  sw t5, 0(t2) # arr[j] = arr[i]
-
-  addi t1, t1, 1 # &(arr[i])++
-  addi t2, t2, 1 # &(arr[j])++
-  addi t3, t3, 1 # k++
-  j forloop3
-endfor3:
-
-for4:
-  li t0, 14 # nodeSize (in bytes) = 14
   li t3, 0 # offset = 6
 
 forloop3:
-  bge t3, t0, endfor3 # if (k >= nodeSize) goto endfor3
-  lw t4, 0(t1) # t5 = *(&arr[i] + k)
-  lw t5, 0(t2) # t7 = *(&arr[j] + k)
-  sw t4, 0(t1) # arr[i] = arr[j]
-  sw t5, 0(t2) # arr[j] = arr[i]
+  bge t3, t0, endfor3 # if (offset >= nodeSize) goto endfor3
+  lw t4, 0(t1) # t4 = *(&arr[i] + offset)
+  lw t5, 0(t2) # t5 = *(&arr[j] + offset)
+  sw t4, 0(t2) # arr[i] = arr[j]
+  sw t5, 0(t1) # arr[j] = arr[i]
 
-  addi t1, t1, 4 # &(arr[i] + offset)
-  addi t2, t2, 4 # &(arr[j] + offset)
+  addi t1, t1, 4 # &(arr[i]) + 4
+  addi t2, t2, 4 # &(arr[j])+ 4
   addi t3, t3, 4 # offset += 4
   j forloop3
+
 endfor3:
   ret # return to caller
 	# end subroutine
