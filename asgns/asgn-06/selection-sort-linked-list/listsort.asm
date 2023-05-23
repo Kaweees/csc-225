@@ -46,16 +46,31 @@ endfor:
 if2:
   # works if (min != head)
   beq t0, a0, endif2 # if (min == head), goto endif2
-  # swapNodes(&head, head, min, beforeMin);
-  
-
+swap:
+  addi sp, sp, -16 # allocate space on the stack
+  sw ra, 0(sp) # save ra to stack
+  sw a0, 4(sp) # save head to stack
+  addi a0, sp, 4 # a0 = &head
+  lw a1, 4(t0) # a1 = head
+  mv a2, t0 # a2 = min
+  mv a3, t1 # a3 = beforeMin
+  jal swapNodes # swapNodes(&head, head, min, beforeMin)
+swapEnd:
+  lw ra, 0(sp) # restore ra from stack
+  lw a0, 4(sp) # restore head from stack
+  addi sp, sp, 16 # deallocate space on the stack
 
 endif2:
+  addi sp, sp, -16 # allocate space on the stack
+  sw ra, 0(sp) # save ra to stack
+  sw a0, 4(sp) # save head to stack
+  addi a0, t0, 32 # a0 = min->next
+  jal recurSelectionSort # recurSelectionSort(head->next)
+  jal recurSelectionSort # a0 = recurSelectionSort(head->next)
+  sw a0, 0(a0) # head->next = a0
+  lw ra, 0(sp) # restore ra from stack
+  lw a0, 4(sp) # restore head from stack
+  addi sp, sp, 16 # deallocate space on the stack
 
-
-#	head->next = recurSelectionSort(head->next);
-
-#	return head;
-
-
-#}
+  ret # return head
+  # end subroutine
