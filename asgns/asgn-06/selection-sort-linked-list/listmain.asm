@@ -3,7 +3,7 @@
   .globl main
 main:
   li sp, 0x7ffffe00
-  addi sp, sp, - 16
+  addi sp, sp, -16
   
   # studentlist = createList(studentArr, SIZE);
   li a1, 10
@@ -27,7 +27,7 @@ main:
   .globl addStudent
   # asm is nutty as the struct was passed in the registers.
 addStudent:
-  addi sp, sp, - 16
+  addi sp, sp, -16
   sw ra, 12(sp)
   sw s0, 8(sp)
   sw s1, 4(sp)
@@ -53,7 +53,7 @@ addStudent:
   .globl createList
 createList:
   blez a1, endcreateList
-  addi sp, sp, - 48
+  addi sp, sp, -48
   sw ra, 44(sp)
   sw s0, 40(sp)
   sw s1, 36(sp)
@@ -90,7 +90,7 @@ endcreateList:
   .globl printList
 printList:
   beqz a0, endprintList
-  addi sp, sp, - 16
+  addi sp, sp, -16
   sw ra, 12(sp)
   sw s0, 8(sp)
   mv s0, a0
@@ -130,7 +130,7 @@ swapNodes:
   
   .globl sort
 sort:
-  addi sp, sp, - 16
+  addi sp, sp, -16
   sw ra, 12(sp)
   sw s0, 8(sp)
   mv s0, a0
