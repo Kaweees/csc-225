@@ -5,37 +5,37 @@ main:
   li sp, 0x7ffffe00
   
   #init saved registers.
-  li s0, - 1
-  li s1, - 1
-  li s2, - 1
-  li s3, - 1
-  li s4, - 1
-  li s5, - 1
-  li s6, - 1
-  li s7, - 1
-  li s8, - 1
-  li s9, - 1
-  li s10, - 1
-  li s11, - 1
+  li s0, -1
+  li s1, -1
+  li s2, -1
+  li s3, -1
+  li s4, -1
+  li s5, -1
+  li s6, -1
+  li s7, -1
+  li s8, -1
+  li s9, -1
+  li s10, -1
+  li s11, -1
   
   #init temp registers.
-  li t0, - 1
-  li t1, - 1
-  li t2, - 1
-  li t3, - 1
-  li t4, - 1
-  li t5, - 1
-  li t6, - 1
+  li t0, -1
+  li t1, -1
+  li t2, -1
+  li t3, -1
+  li t4, -1
+  li t5, -1
+  li t6, -1
   
   #init arg registers.
-  li a0, - 1
-  li a1, - 1
-  li a2, - 1
-  li a3, - 1
-  li a4, - 1
-  li a5, - 1
-  li a6, - 1
-  li a7, - 1
+  li a0, -1
+  li a1, -1
+  li a2, -1
+  li a3, -1
+  li a4, -1
+  li a5, -1
+  li a6, -1
+  li a7, -1
   
   # studentlist = createList(studentArr, SIZE);
   li a1, 10
@@ -60,7 +60,7 @@ main:
   .globl addStudent
   # asm is nutty as the struct was passed in the registers.
 addStudent:
-  addi sp, sp, - 16
+  addi sp, sp, -16
   sw ra, 12(sp)
   sw s0, 8(sp)
   sw s1, 4(sp)
@@ -86,7 +86,7 @@ addStudent:
   .globl createList
 createList:
   blez a1, endcreateList
-  addi sp, sp, - 48
+  addi sp, sp, -48
   sw ra, 44(sp)
   sw s0, 40(sp)
   sw s1, 36(sp)
@@ -123,7 +123,7 @@ endcreateList:
   .globl printList
 printList:
   beqz a0, endprintList
-  addi sp, sp, - 16
+  addi sp, sp, -16
   sw ra, 12(sp)
   sw s0, 8(sp)
   mv s0, a0
@@ -163,7 +163,7 @@ swapNodes:
   
   .globl sort
 sort:
-  addi sp, sp, - 16
+  addi sp, sp, -16
   sw ra, 12(sp)
   sw s0, 8(sp)
   mv s0, a0
@@ -261,7 +261,7 @@ checkregisters:
   ecall
   li t1, 0
 SPOK:
-  li t0, - 1
+  li t0, -1
   beq t0, s0, S0OK
   #s0 corrupted
   la a0, s0msg
